@@ -59,7 +59,7 @@ static
 	Text:TD_Background = Text:INVALID_TEXT_DRAW,
 	Text:TD_Text[RussifierType] = {INVALID_TEXT_DRAW, ...},
 	bool:IsSettingsShowed[MAX_PLAYERS char],
-	gSettingsText[RUSSIFIER_TEXT_LENGTH char] = !"Я могу прочитать этот текст, это мой русификатор";
+	gSettingsText[RUSSIFIER_TEXT_LENGTH char] = !"РЇ РјРѕРіСѓ РїСЂРѕС‡РёС‚Р°С‚СЊ СЌС‚РѕС‚ С‚РµРєСЃС‚, СЌС‚Рѕ РјРѕР№ СЂСѓСЃРёС„РёРєР°С‚РѕСЂ";
 
 const
 	RussifierType:TEXT_RUSSIFIERS_COUNT = RussifierType:7; // only Russian localizations
@@ -202,6 +202,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 	if (clickedid == Text:INVALID_TEXT_DRAW && IsSettingsShowed{playerid}) {
 		HidePlayerRussifierSettings(playerid);
 		CallLocalFunction("OnPlayerRussifierSelect", "iii", playerid, false, -1);
+		print("INVALID_TEXT_DRAW");
 		return 1;
 	}
 
@@ -210,6 +211,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 			HidePlayerRussifierSettings(playerid);
 			SetPlayerRussifierType(playerid, type);
 			CallLocalFunction("OnPlayerRussifierSelect", "iii", playerid, true, _:type);
+			print("TEXT_RUSSIFIERS_COUNT");
 			return 1;
 		}
 	}
@@ -255,6 +257,7 @@ stock Russifier_SetText(const string[])
 stock ShowPlayerRussifierSettings(playerid)
 {
 	if (!IsPlayerConnected(playerid)) {
+		print("IsPlayerConnected");
 		return 0;
 	}
 
@@ -270,6 +273,7 @@ stock ShowPlayerRussifierSettings(playerid)
 
 	SelectTextDraw(playerid, RUSSIFIER_SELECT_COLOR);
 	IsSettingsShowed{playerid} = true;
+	print("ShowPlayerRussifierSettings");
 	return 1;
 }
 
